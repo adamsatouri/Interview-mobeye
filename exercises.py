@@ -1,4 +1,3 @@
-
 def is_anagram(s1, s2):
     """
     Write an algorithm that returns whether s1 and s2 are anagrams of each other, i.e.
