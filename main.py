@@ -61,7 +61,7 @@ if __name__ == "__main__":
         ))
 
     for inp, out in (("()", True), ("(())", True), ("()()", True), ("(()", False), ("())", False),
-                     ("(((()", False), ("())))", False)):
+                     ("(((()", False), ("())))", False), ("()))((()", False)):
         suite.addTest(AlgorithmTest(
             "test_algorithm_input_output",
             algorithm_name="check_parenthesis_consistency",
