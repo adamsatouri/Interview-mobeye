@@ -41,7 +41,24 @@ def check_parenthesis_consistency(string):
     """
 
     # Write your code here
-    pass
+    if len(string) == 0 :
+        return True
+
+    count = 0
+
+    for i in string:
+        if count < 0:
+            return False
+        if i == '(':
+            count += 1
+        elif i == ')':
+            count -= 1
+
+    if count == 0:
+        return True
+    else:   
+        return False
+    
 
 
 def shortest_path(start, end, maze):
