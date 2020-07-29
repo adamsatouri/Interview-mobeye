@@ -9,6 +9,23 @@ def is_anagram(s1, s2):
     """
 
     # Write your code here
+    if len(s1) != len(s2) :
+        return False
+
+    s1_hash , s2_hash = {} , {} 
+
+    for i in range(len(s1)):
+        if s1[i] in s1_hash:
+            s1_hash[s1[i]]+=1
+        else:
+            s1_hash[s1[i]]=1
+
+        if s2[i] in s2_hash:
+            s2_hash[s2[i]]+=1
+        else:
+            s2_hash[s2[i]]=1
+            
+    return (s1_hash == s2_hash)
     pass
 
 
