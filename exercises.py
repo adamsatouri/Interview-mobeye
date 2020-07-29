@@ -74,4 +74,57 @@ def shortest_path(start, end, maze):
     """
 
     # Write your code here
-    pass
+    from queue import Queue
+    def check(x,y):
+        return ((x > -1 and x < nr) and (y > -1 and y < nc) and (maze[x][y] != 0))
+
+    def get_parent(current_node):
+        current_level = level[current_node[0]][current_node[1]]
+        for i in range(4):
+            x_translated , y_translated = current_node[0] + dx[i] , current_node[1] + dy[i]
+            if (x_translated > -1 and x_translated < nr) and ( y_translated > -1 and y_translated < nc) and level[x_translated][y_translated] == current_level-1:
+                current_node  = (x_translated , y_translated)
+                return current_node 
+
+
+
+
+    nr = len(maze)
+    nc = len(maze[0])
+    nlevel = 0
+
+    level = [[-1 for col in range(nc)] for row in range(nr)]
+
+    level[start[0]][start[1]] = nlevel
+
+    q = Queue()
+
+    q.put(start)
+
+    dx,dy = [0,0,1,-1],[1,-1,0,0]
+
+    reached = False
+
+    while not q.empty() and not reached:
+        
+        current_node = q.get()
+        for i in range(4):
+            x_translated , y_translated = current_node[0] + dx[i] , current_node[1] + dy[i]
+            if check(x_translated,y_translated) and level[x_translated][y_translated] == -1:
+                q.put((x_translated,y_translated))
+                level[x_translated][y_translated] = level[current_node[0]][current_node[1]] + 1
+                if x_translated == end[0] and y_translated == end[1]:
+                    reached = True 
+                    break
+
+    if not reached: 
+        return False
+
+    
+    output = [end]
+    current_node = end
+    while current_node  != start :
+        current_node  = get_parent(current_node)
+        output.append(current_node)
+        
+    return output[::-1]
